@@ -1,0 +1,73 @@
+Test Case ID,Test Case Description,Preconditions,Test Steps,Expected Result
+TC-CU-001,Valid email format (name@domain.xyz) - verify submission succeeds,User is on Contact Us page,"1. Enter valid email format: name@domain.xyz.
+2. Enter valid contact name.
+3. Enter valid message (within 500 characters).
+4. Click Submit button.",Form submission succeeds and confirmation message is displayed.
+TC-CU-002,Invalid email format (missing @) - verify error message,User is on Contact Us page,"1. Enter invalid email: namedomain.xyz.
+2. Enter valid contact name.
+3. Enter valid message.
+4. Click Submit button.",Error message displayed indicating invalid email format.
+TC-CU-003,Invalid email format (missing domain) - verify error message,User is on Contact Us page,"1. Enter invalid email: name@.xyz.
+2. Enter valid contact name.
+3. Enter valid message.
+4. Click Submit button.",Error message displayed indicating invalid email format.
+TC-CU-004,Invalid email format (missing .xyz) - verify error message,User is on Contact Us page,"1. Enter invalid email: name@domain.
+2. Enter valid contact name.
+3. Enter valid message.
+4. Click Submit button.",Error message displayed indicating invalid email format.
+TC-CU-005,Empty email field - verify mandatory field error,User is on Contact Us page,"1. Leave email field empty.
+2. Enter valid contact name.
+3. Enter valid message.
+4. Click Submit button.",Error message displayed indicating email is a mandatory field.
+TC-CU-006,Email with special characters - verify handling,User is on Contact Us page,"1. Enter email: test+user@domain.xyz.
+2. Enter valid contact name.
+3. Enter valid message.
+4. Click Submit button.",Email with special characters is accepted and form submission succeeds.
+TC-CU-007,Valid contact name entered - verify submission succeeds,User is on Contact Us page,"1. Enter valid email.
+2. Enter contact name: John Doe.
+3. Enter valid message.
+4. Click Submit button.",Form submission succeeds with valid contact name.
+TC-CU-008,Empty contact name field - verify mandatory field error,User is on Contact Us page,"1. Enter valid email.
+2. Leave contact name empty.
+3. Enter valid message.
+4. Click Submit button.",Error message displayed indicating contact name is a mandatory field.
+TC-CU-009,Contact name with special characters - verify acceptance,User is on Contact Us page,"1. Enter valid email.
+2. Enter contact name: O'Brien-Smith.
+3. Enter valid message.
+4. Click Submit button.",Contact name with special characters is accepted and form submission succeeds.
+TC-CU-010,Contact name with numbers - verify acceptance,User is on Contact Us page,"1. Enter valid email.
+2. Enter contact name: John123.
+3. Enter valid message.
+4. Click Submit button.",Contact name with numbers is accepted and form submission succeeds.
+TC-CU-011,Message with exactly 500 characters - verify submission succeeds,User is on Contact Us page,"1. Enter valid email.
+2. Enter valid contact name.
+3. Enter message with exactly 500 characters.
+4. Click Submit button.",Form submission succeeds with 500-character message.
+TC-CU-012,Message with 501 characters - verify error message,User is on Contact Us page,"1. Enter valid email.
+2. Enter valid contact name.
+3. Enter message with 501 characters.
+4. Click Submit button.",Error message displayed indicating message exceeds maximum length of 500 characters.
+TC-CU-013,Empty message field - verify mandatory field error,User is on Contact Us page,"1. Enter valid email.
+2. Enter valid contact name.
+3. Leave message field empty.
+4. Click Submit button.",Error message displayed indicating message is a mandatory field.
+TC-CU-014,Message with 1 character - verify submission succeeds,User is on Contact Us page,"1. Enter valid email.
+2. Enter valid contact name.
+3. Enter message: A.
+4. Click Submit button.",Form submission succeeds with a 1-character message.
+TC-CU-015,Message with special characters - verify handling,User is on Contact Us page,"1. Enter valid email.
+2. Enter valid contact name.
+3. Enter message: Hello! @#$%^&*() 
+4. Click Submit button.",Message with special characters and emojis is accepted and form submission succeeds.
+TC-CU-016,All fields valid - verify successful submission,User is on Contact Us page,"1. Enter email: test@domain.xyz.
+2. Enter contact name: John Doe.
+3. Enter valid message.
+4. Click Submit button.",Form submission succeeds and confirmation message is displayed.
+TC-CU-017,Multiple fields invalid - verify all errors displayed,User is on Contact Us page,"1. Enter invalid email.
+2. Leave contact name empty.
+3. Enter message with 501 characters.
+4. Click Submit button.","All validation errors are displayed simultaneously for email, contact name, and message fields."
+TC-CU-018,Form submission with valid data - verify confirmation message,User is on Contact Us page,"1. Enter email: test@domain.xyz.
+2. Enter contact name: John Doe.
+3. Enter message: This is a test message.
+4. Click Submit button.",Confirmation message is displayed indicating successful submission.

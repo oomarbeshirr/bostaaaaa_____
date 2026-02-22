@@ -1,0 +1,15 @@
+Bosta API Security Test Report
+==================================================
+Generated: 2026-02-22 22:26:00
+Base URL: https://stg-app.bosta.co/api/v2
+
+create_pickup_auth_bypass: PASS
+create_pickup_invalid_token: PASS
+create_pickup_sql_injection_email: PASS
+create_pickup_xss_name: PASS
+create_pickup_negative_parcels: PASS
+create_pickup_past_date: PASS
+forget_password_invalid_email: PASS
+forget_password_sql_injection: PASS
+forget_password_rate_limiting: INFO - No rate limit observed (may be acceptable)
+generate_token_endpoint: PASS

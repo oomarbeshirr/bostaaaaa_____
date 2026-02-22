@@ -1,0 +1,111 @@
+Test Case ID,API,Category,Test Case Description,Preconditions,Test Steps,Expected Result
+TC-SEC-001,Create Pickup,Authentication,Send request without Authorization header,API endpoint is accessible,"1. Send POST request to /api/v2/pickups without header. 
+
+ 2. Include valid JSON payload.",API returns 401 Unauthorized
+TC-SEC-002,Create Pickup,Authentication,Send request with invalid/malformed token,API endpoint is accessible,"1. Send POST request with Authorization: invalid_token. 
+
+ 2. Include valid JSON payload.",API returns 401 Unauthorized
+TC-SEC-003,Create Pickup,Authentication,Send request with expired JWT token,Valid expired token available,"1. Obtain expired token. 
+
+ 2. Send POST request with expired token.",API returns 401 Unauthorized
+TC-SEC-004,Create Pickup,Authentication,Send request with empty Bearer token,API endpoint is accessible,"1. Send POST request with Authorization: Bearer. 
+
+ 2. Include valid JSON payload.",API returns 401 Unauthorized
+TC-SEC-005,Create Pickup,Authorization,Create pickup for different business location,Valid token for Business A,"1. Obtain token for Business A. 
+
+ 2. Send request with businessLocationId belonging to Business B.",API returns 403 Forbidden or rejects request
+TC-SEC-006,Create Pickup,Authorization,Access other business locations data,Valid token for one business,"1. Attempt to list/modify pickups for different business. 
+
+ 2. Verify authorization check.",API returns 403 Forbidden
+TC-SEC-007,Create Pickup,Input Validation,SQL Injection in email field,Valid token available,"1. Send contactPerson.email with value: test@test.com' OR 1=1--. 
+
+ 2. Observe response.",Input is sanitized; no SQL error; 400 or sanitized handling
+TC-SEC-008,Create Pickup,Input Validation,NoSQL Injection in businessLocationId,Valid token available,"1. Send businessLocationId: {""$ne"":null}. 
+
+ 2. Observe response.",Input rejected or sanitized; no data leakage
+TC-SEC-009,Create Pickup,Input Validation,XSS in contactPerson name field,Valid token available,"1. Send name: <script>alert(1)</script>. 
+
+ 2. Check if script executes in stored output.",Input sanitized; no XSS execution
+TC-SEC-010,Create Pickup,Input Validation,Command Injection in phone field,Valid token available,"1. Send phone: +201055592829; rm -rf /. 
+
+ 2. Observe server behavior.",Input rejected; no command execution
+TC-SEC-011,Create Pickup,Business Logic,Negative numberOfParcels,Valid token available,"1. Send numberOfParcels: -1. 
+
+ 2. Observe response.",API rejects with validation error
+TC-SEC-012,Create Pickup,Business Logic,Very large numberOfParcels (999999),Valid token available,"1. Send numberOfParcels: 999999. 
+
+ 2. Observe response.",API rejects or enforces reasonable limit
+TC-SEC-013,Create Pickup,Business Logic,Past scheduledDate,Valid token available,"1. Send scheduledDate: 2020-01-01. 
+
+ 2. Observe response.",API rejects past date
+TC-SEC-014,Create Pickup,Business Logic,Invalid date format,Valid token available,"1. Send scheduledDate: ""invalid"". 
+
+ 2. Observe response.",API returns 400 Bad Request
+TC-SEC-015,Create Pickup,Data Exposure,Verify response sensitive data,Successful pickup creation,"1. Create pickup successfully. 
+
+ 2. Inspect response for internal IDs or PII.",No sensitive data (tokens/PII) exposed in response
+TC-SEC-016,Update Bank Info,Token Security,Request with expired token,Expired token available,"1. Obtain expired token. 
+
+ 2. Send PUT/POST request with expired token.",API returns 401 Unauthorized
+TC-SEC-017,Update Bank Info,Token Security,Request with tampered JWT,Valid JWT available,"1. Decode JWT and modify payload (e.g. user ID). 
+
+ 2. Re-sign or send modified token.",API rejects tampered token
+TC-SEC-018,Update Bank Info,Token Security,Request with token from different user,Two valid tokens available,"1. Obtain token for User A. 
+
+ 2. Attempt to update User B bank info with User A token.",API returns 403 Forbidden
+TC-SEC-019,Update Bank Info,Authorization,IDOR: Update other user bank info,Valid token for User A,"1. Send request with User B identifier in payload/URL. 
+
+ 2. Observe if update affects User B.",API enforces ownership; no IDOR
+TC-SEC-020,Update Bank Info,Sensitive Data,SQL Injection in IBAN field,Valid token and OTP,"1. Send ibanNumber: '; DROP TABLE users;--. 
+
+ 2. Observe response and DB state.",Input sanitized; no SQL execution
+TC-SEC-021,Update Bank Info,Sensitive Data,OTP bypass with null/empty value,Valid token,"1. Send paymentInfoOtp: null or empty. 
+
+ 2. Attempt update without OTP.",API requires valid OTP; rejects request
+TC-SEC-022,Update Bank Info,Sensitive Data,OTP bypass with common values,Valid token,"1. Send paymentInfoOtp: 000000. 
+
+ 2. Attempt update bank info.",API rejects invalid OTP
+TC-SEC-023,Update Bank Info,Input Validation,XSS in beneficiaryName,Valid token and OTP,"1. Send beneficiaryName: <script>alert(1)</script>. 
+
+ 2. Check stored/displayed output.",Input sanitized; no XSS
+TC-SEC-024,Update Bank Info,Input Validation,SQL Injection in accountNumber,Valid token and OTP,"1. Send accountNumber: 123' OR 1=1--. 
+
+ 2. Observe response.",Input sanitized; no SQL error or injection
+TC-SEC-025,Update Bank Info,Data Exposure,Masking of sensitive bank data,Successful update,"1. Update info with valid data. 
+
+ 2. Inspect response for full IBAN/Account numbers.",Response masks or omits sensitive data (e.g. ****1234)
+TC-SEC-026,Forget Password,Rate Limiting,Rapid successive requests (Brute Force),API accessible,"1. Send 100+ forget-password requests rapidly for same email. 
+
+ 2. Observe server response.",API implements rate limiting (429 Too Many Requests)
+TC-SEC-027,Forget Password,Email Enumeration,Compare registered vs unregistered email,None,"1. Request with registered email. 
+
+ 2. Request with nonexistent email. 
+
+ 3. Compare timing/messages.",Responses should be identical (Generic message)
+TC-SEC-028,Forget Password,Input Validation,SQL Injection in email field,API accessible,"1. Send email: test@test.com' OR 1=1--. 
+
+ 2. Observe response.",Input sanitized; no SQL error
+TC-SEC-029,Forget Password,Input Validation,XSS in email field,API accessible,"1. Send email: <script>alert(1)</script>@test.com. 
+
+ 2. Check response/email contents.",Input sanitized; no XSS execution
+TC-SEC-030,Forget Password,Input Validation,Invalid email format,API accessible,"1. Send email: notanemail. 
+
+ 2. Observe response.",API returns 400 Bad Request
+TC-SEC-031,Forget Password,Token Security,Reset token predictability,Access to reset flow,"1. Request reset for same email multiple times. 
+
+ 2. Compare token formats and entropy.",Tokens must be unpredictable (Cryptographically secure)
+TC-SEC-032,Forget Password,Token Security,Reset token expiration,Valid reset token,"1. Request password reset. 
+
+ 2. Use token after expiration (e.g. 24h).",API rejects expired token
+TC-SEC-033,Forget Password,Token Security,Reset token reuse prevention,Valid token used once,"1. Complete reset with token. 
+
+ 2. Attempt to use the same token again.",API rejects reused token
+TC-SEC-034,Forget Password,Authentication,Request without Authorization,API spec,"1. Send request without header (if API requires it). 
+
+ 2. Observe response.",API returns 401 or follows spec consistently
+TC-SEC-035,All APIs,API Security,Verify HTTPS only,Network access,"1. Attempt HTTP (non-TLS) request to API. 
+
+ 2. Verify redirect or rejection.",API enforces HTTPS; rejects insecure HTTP
+TC-SEC-036,All APIs,API Security,Verify CORS headers,Browser context,"1. Send cross-origin request from different domain. 
+
+ 2. Inspect CORS headers.",Appropriate CORS policy; no Access-Control-Allow-Origin: *

@@ -1,0 +1,29 @@
+ID,Summary,Steps,Expected Result,Pass
+TC-1,Verify Page UI Elements,1. Access the inventory page. and verify UI elements corresponded design,"Title ""Products"", Hamburger icon, Cart icon, and Swag Labs logo should be visible.",Pass
+TC-2,Verify Product Grid,1. Count the number of products.,Exactly 6 products should be displayed in a two-column list.,Pass
+TC-3,Verify Product Details,1. Check each product's content.,"Image, Name, Description, Price, and ""Add to cart"" button must be present for each item.",Pass
+TC-4,Verify Sorting (All options),"1. Try Name (A-Z), (Z-A), Price (Low-High), (High-Low).",Products should re-order correctly according to each selected criteria.,Pass
+TC-5,Add to Cart (Inventory),"1. Click ""Add to cart"" on inventory page.","Button changes to ""Remove"", color changes, and Cart badge updates.",Pass
+TC-6,Cart Page Details,1. Click Cart icon.,"Should display QTY, Description, Non-editable quantity box, and ""Remove"" button.",Pass
+TC-7,Checkout Information,"1. Click Checkout.
+
+2. Fill First, Last Name, and Zip.","All fields should accept input and ""Continue"" should lead to Overview.",Pass
+TC-8,Checkout overview,1. Verify Payment & Shipping Info.,"Should show ""SauceCard #31337"" and ""Free Pony Express Delivery!"".",Pass
+TC-9,Price Calculation,1. Verify Total Price.,total price = Item total + Tax,Pass
+TC-10,Finish Order,"1. Click ""Finish"" on checkout overview.","Redirect to Complete page with ""Thank you for your order!"" message.",Pass
+TC-11,Side Menu Links,"1. Open Menu.
+
+2. Click All Items, About, Logout.","Each link should redirect to its specific destination (About -> saucelabs.com).
+                                                                                          (All item -> inventory)
+                                                                                          (logout -> login page)
+
+",Pass
+TC-12,Reset App State,"1. Add item to cart.
+
+2. Click Reset App State.","1. The item is added to cart
+2. Cart badge should be cleared",Pass
+TC-13,Reset App State in between flow,"1. Add item to cart.
+2.go to your cart
+3.press Reset app",Cart should be cleared and can't redirect to checkout.,Fail
+TC-13,Product Page UI,1. Click on a product name or image.,"Should show a larger image, name, full description, and price.",Pass
+TC-14,Back to Products,"1. Click ""Back to products"" arrow.",User is redirected to the main inventory page.,Pass

@@ -1,0 +1,20 @@
+Summary,Description,Preconditions,Steps to Reproduce,Actual Result,Expected Result,OS/Browser
+Sort dropdown arrow is unresponsive,"Clicking the dropdown arrow does not expand the sorting menu; 
+only clicking the text works.",User is logged in and landing page with sorting field is displayed.,"1. Hover over sort dropdown icon
+2. Click the arrow icon
+3. Observe behavior","Dropdown does not expand when arrow 
+icon is clicked.",Both arrow icon and text should trigger the dropdown menu.,Windows 11 - Chrome
+Broken Privacy Policy link,Privacy Policy link in footer does not redirect to any page.,User is on landing page and footer is visible.,"1. Scroll to footer
+2. Click 'Privacy Policy' link",No redirection occurs.,User should be redirected to Privacy Policy page.,Windows 11 - Chrome
+Unable to add multiple quantities of the same item,Cart quantity field is non-editable and user cannot increase item quantity.,User is logged in and product is available.,"1. Add product to cart
+2. Navigate to cart
+3. Try increasing quantity",Quantity cannot be edited or increased.,User should be able to modify quantity from cart or product page.,Windows 11 - Chrome
+Missing pointer cursor on clickable elements,Clickable elements do not show pointer cursor on hover.,User is on product listing page.,"1. Hover over product name
+2. Hover over product image",Cursor remains default instead of pointer.,Clickable elements should display pointer cursor.,Windows 11 - Chrome
+Button state inconsistency after Reset App State,"After resetting app state, cart clears but buttons remain in 'Remove' state.",Product added to cart and Reset App State is used.,"1. Add product to cart
+2. Use Reset App State
+3. Return to product page",Buttons still show 'Remove'.,Buttons should revert to 'Add to cart'.,Windows 11 - Chrome
+Checkout bypass with empty cart,User can complete checkout even when cart is empty after Reset App State.,Checkout process started and Reset App State used.,"1. Add product to cart
+2. Start checkout
+3. Use Reset App State
+4. Continue checkout",Checkout completes with empty cart.,System should prevent completing checkout with empty cart.,Windows 11 - Chrome

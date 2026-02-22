@@ -1,0 +1,2 @@
+# Bosta API Security Test Suite - Dependencies
+requests>=2.28.0

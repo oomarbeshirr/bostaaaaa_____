@@ -1,0 +1,12 @@
+ID,Title,Preconditions,Test Steps,Test Data,Expected Result,Actual Result,Status,Comments
+TC01,Verify API returns a 200 response for a valid tracking number,API endpoint is accessible,1. Send a GET request to the API with a valid tracking number.,Tracking number: 9442984,"Response status code is 200, and the full history of the delivery is returned.",,,
+TC02,Verify API returns a valid response body format (JSON/XML),API endpoint is accessible,"1. Send a GET request to the API with a valid tracking number.
+2. Check response format.",Header: Accept: application/json,Response body is in JSON format.,,,
+TC03,Verify the API handles missing tracking numbers gracefully,API endpoint is accessible,1. Send a GET request to the API without a tracking number.,None,"Response status code is 404 with an appropriate error message: ""Not Found.""",,,
+TC004,Verify API returns 404 for invalid tracking numbers,API endpoint is accessible,1. Send a GET request to the API with an invalid tracking number,Tracking number: invalid123,"Response status code is 404 with error: ""No delivery matched the given tracking number.""",,,
+TC005,Verify API response includes all required fields,API endpoint is accessible,1. Send a GET request to the API with a valid tracking number.,Tracking number: 9442984,"Response body includes CurrentStatus, TrackingNumber, TrackingURL, SupportPhoneNumbers, and TransitEvents.",,,
+TC006,Verify the Content-Type header works with different formats,API endpoint is accessible,1. Send a GET request with Content-Type: application/json and Content-Type: text/xml.,Header: Content-Type: application/json/text/xml,Response status matches the requested Content-Type format.,,,
+TC007,Verify the Accept header works with different response formats,API endpoint is accessible,1. Send a GET request with Accept: application/json and Accept: application/xml.,Header: Accept: application/json/application/xml,Response format matches the Accept header value.,,,
+TC008,Verify error handling for server issues,API endpoint is accessible,"1. Simulate a server issue.
+2. Send a GET request to the API.",None,"Response status code is 500 with an appropriate error message: ""Internal Server Error.""",,,
+TC009,Verify API response with missing mandatory headers,API endpoint is accessible,1. Send a GET request without the X-Requested-By or Accept headers.,Missing headers: Host,Response status code is 400 or appropriate error indicating missing headers.,,,

@@ -1,0 +1,97 @@
+Test Case ID,Test Case Description,Preconditions,Test Steps,Expected Result
+TC-WA-001,Install plugin with valid phone number - verify OTP sent,User has access to WhatsApp plugin installation page,"1. Navigate to WhatsApp plugin installation page.
+2. Enter valid phone number (e.g., +201234567890).
+3. Click on 'Send OTP' or 'Verify' button.
+4. Verify OTP is sent.",OTP is successfully sent to the provided phone number and user receives notification.
+TC-WA-002,Enter valid OTP - verify installation success,User has received OTP on their phone number,"1. Enter the OTP received on phone.
+2. Click on 'Verify' or 'Confirm' button.
+3. Wait for installation process to complete.",Plugin installation is successful and user is redirected to dashboard or confirmation page.
+TC-WA-003,Enter invalid OTP - verify error message,User has received OTP on their phone number,"1. Enter incorrect OTP (wrong digits).
+2. Click on 'Verify' or 'Confirm' button.",Error message displayed indicating invalid OTP and user is prompted to re-enter.
+TC-WA-004,Enter expired OTP - verify error message,User has received OTP that has expired,"1. Wait for OTP to expire (5–10 minutes).
+2. Enter the expired OTP.
+3. Click on 'Verify' or 'Confirm' button.",Error message displayed indicating OTP has expired and user is prompted to request a new OTP.
+TC-WA-005,Invalid phone number format - verify error message,User is on WhatsApp plugin installation page,"1. Navigate to WhatsApp plugin installation page.
+2. Enter invalid phone number format (e.g., 12345, abc123, missing country code).
+3. Click on 'Send OTP' button.",Error message displayed indicating invalid phone number format.
+TC-WA-006,Resend OTP functionality - verify new OTP received,User has requested OTP but did not receive it or it expired,"1. Navigate to WhatsApp plugin installation page.
+2. Enter valid phone number.
+3. Click on 'Resend OTP' button.
+4. Verify new OTP is sent.",New OTP is successfully sent to the phone number and previous OTP is invalidated.
+TC-WA-007,Send text message to customer - verify message delivered,WhatsApp plugin is installed and user is logged into dashboard,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select a customer.
+4. Type a text message.
+5. Click Send button.
+6. Verify message status.",Message is successfully sent and delivered to customer. Status shows as 'Delivered' or 'Sent'.
+TC-WA-008,Receive message from customer - verify message displayed,WhatsApp plugin is installed and customer sends a message,"1. Customer sends a message via WhatsApp.
+2. Login to dashboard.
+3. Navigate to chat section.
+4. Verify message appears.",Message from customer is displayed in chat with correct timestamp and sender information.
+TC-WA-009,Send multiple messages - verify all messages sent,WhatsApp plugin is installed and user is in chat with customer,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select a customer.
+4. Send multiple text messages in sequence.
+5. Verify all messages.",All messages are successfully sent and displayed in chronological order.
+TC-WA-010,Chat with multiple customers - verify conversation separation,WhatsApp plugin is installed and user has multiple customer conversations,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Open conversation with Customer A and send message.
+4. Open conversation with Customer B and send message.
+5. Verify conversations are separate.",Each customer conversation is displayed separately with correct messages.
+TC-WA-011,Long message handling - verify truncation or scrolling,WhatsApp plugin is installed and user is in chat,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select a customer.
+4. Type a very long message (1000+ characters).
+5. Send the message.
+6. Verify message display.",Long message is truncated with 'Read more' or displayed with scrolling capability.
+TC-WA-012,Share product from dashboard - verify product details sent,WhatsApp plugin is installed and products are available,"1. Login to dashboard.
+2. Navigate to products section.
+3. Select a product.
+4. Click 'Share via WhatsApp'.
+5. Select customer.
+6. Send the product.","Product details (name, price, image, link) are successfully sent via WhatsApp."
+TC-WA-013,Share multiple products - verify all products shared,WhatsApp plugin is installed and user has multiple products,"1. Login to dashboard.
+2. Navigate to products section.
+3. Select multiple products.
+4. Click 'Share via WhatsApp'.
+5. Select customer.
+6. Send products.",All selected products are successfully shared and displayed in chat.
+TC-WA-014,Share product with customer - verify customer receives details,WhatsApp plugin is installed and user shares a product,"1. Login to dashboard.
+2. Select product.
+3. Choose customer.
+4. Share via WhatsApp.
+5. Verify on customer's WhatsApp.","Customer receives product link and details (name, price, image)."
+TC-WA-015,Share non-existent product - verify error handling,WhatsApp plugin is installed,"1. Login to dashboard.
+2. Attempt to share deleted/non-existent product.
+3. Click 'Share via WhatsApp'.",Error message displayed indicating product not found or cannot be shared.
+TC-WA-016,Send image to customer - verify image delivered,WhatsApp plugin is installed and user has image file,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select customer.
+4. Click 'Attach/Image'.
+5. Select image file.
+6. Send image.",Image is successfully sent and displayed in chat.
+TC-WA-017,Send multiple images - verify all images sent,WhatsApp plugin is installed and user has multiple image files,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select customer.
+4. Click 'Attach/Image'.
+5. Select multiple images.
+6. Send images.",All images are successfully sent and displayed in correct order.
+TC-WA-018,Send large image file - verify handling/compression,WhatsApp plugin is installed and user has large image file,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select customer.
+4. Click 'Attach/Image'.
+5. Select large image file (>5MB).
+6. Send image.",Image is compressed automatically or error displayed if file is too large.
+TC-WA-019,Send unsupported image format - verify error message,WhatsApp plugin is installed,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select customer.
+4. Click 'Attach/Image'.
+5. Select unsupported format (.bmp, .tiff, .raw).
+6. Attempt to send.",Error message displayed indicating unsupported file format.
+TC-WA-020,Send image with text - verify both delivered,WhatsApp plugin is installed,"1. Login to dashboard.
+2. Navigate to chat section.
+3. Select customer.
+4. Click 'Attach/Image'.
+5. Select image.
+6. Add text caption.
+7. Send.",Both image and caption are successfully sent and displayed in chat.
