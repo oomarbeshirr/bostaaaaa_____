@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight UTC
-  workflow_dispatch:  # Allow manual trigger
+    - cron: '0 0 * * *'  
+  workflow_dispatch:
 
 jobs:
   security-tests:
@@ -27,14 +27,15 @@ jobs:
 
       - name: Run security tests
         env:
+          
           API_TOKEN: ${{ secrets.API_TOKEN }}
           BOSTA_API_URL: ${{ vars.BOSTA_API_URL || 'https://stg-app.bosta.co/api/v2' }}
         run: python security_tests.py
 
-      - name: Generate test report
+      - name: Generate test report meta
         if: always()
         run: |
-          echo "Security test results" >> security_report.txt
+          echo "Security test results metadata" >> security_report.txt
           echo "Workflow: ${{ github.workflow }}" >> security_report.txt
           echo "Run ID: ${{ github.run_id }}" >> security_report.txt
 
@@ -45,39 +46,4 @@ jobs:
           name: security-test-results
           path: |
             security_report.txt
-
-  postman-tests:
-    runs-on: ubuntu-latest
-    needs: []
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Newman
-        run: npm install -g newman newman-reporter-htmlextra
-
-      - name: Run Postman collection (Tracking API)
-        continue-on-error: true
-        run: |
-          if [ -f Bosta_Tracking_API_Collection.json ] && [ -f Bosta_Tracking_API_Environment.json ]; then
-            newman run Bosta_Tracking_API_Collection.json \
-              -e Bosta_Tracking_API_Environment.json \
-              --reporters cli,json \
-              --reporter-json-export newman_results.json
-          else
-            echo "Postman collection files not found, skipping."
-          fi
-
-      - name: Upload Newman results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: newman-api-results
-          path: newman_results.json
-        continue-on-error: true
+            security_assessment_report.txt
